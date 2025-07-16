@@ -37,15 +37,34 @@ const MyClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axiosSecure.delete(`/my-class/${id}`);
-        if (res.data?.deletedCount > 0) {
-          Swal.fire("Deleted!", "Class has been deleted.", "success");
-          refetch();
+        try {
+          const res = await axiosSecure.delete(`/my-class/${id}`, {
+            data: {
+              teacherEmail: user.email,
+            },
+          });
+
+          console.log(res);
+
+          if (res.data?.result.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your class has been deleted.",
+              icon: "success",
+            });
+            refetch(); // Refresh the class list
+          } else {
+            Swal.fire("Failed!", "Class could not be deleted.", "error");
+          }
+        } catch (error) {
+          console.error("Delete error:", error);
+          Swal.fire("Error", "Something went wrong while deleting.", "error");
         }
       }
     });
   };
 
+  // done
   const handleUpdate = (id) => {
     // Optionally open modal or navigate
     navigate(`/dashboard/update-class/${id}`);
