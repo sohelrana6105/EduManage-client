@@ -141,17 +141,26 @@ const MyClasses = () => {
                 >
                   <FaTrash className="mr-1" /> Delete
                 </button>
-                <button
-                  disabled={cls.status !== "approved"}
-                  onClick={() => handleSeeDetails(cls._id, cls.status)}
-                  className={`flex items-center btn btn-xs ${
-                    cls.status === "approved"
-                      ? "bg-green-500 text-white hover:bg-green-600"
-                      : "bg-gray-300 text-gray-600 cursor-not-allowed"
-                  }`}
+
+                <div
+                  title={
+                    cls.status !== "approved"
+                      ? "Waiting for admin approval"
+                      : ""
+                  }
                 >
-                  <FaEye className="mr-1" /> Details
-                </button>
+                  <button
+                    disabled={cls.status !== "approved"}
+                    onClick={() => handleSeeDetails(cls._id, cls.status)}
+                    className={`flex items-center btn btn-xs ${
+                      cls.status === "approved"
+                        ? "bg-green-500 text-white hover:bg-green-600"
+                        : "bg-gray-300 text-[#FFFF] cursor-not-allowed"
+                    }`}
+                  >
+                    See Details
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -76,6 +76,8 @@ const AddClass = () => {
         status: "pending",
         enrolled: 0,
         feedback: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
       console.log(newClass);
 

@@ -92,12 +92,14 @@ const UpdateClass = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <label className="text-2xl font-bold">Title</label>
         <input
           {...register("title")}
           placeholder="Class Title"
           className="input input-bordered w-full"
         />
 
+        <label className="text-2xl font-bold">Price</label>
         <input
           {...register("price")}
           type="number"
@@ -124,6 +126,7 @@ const UpdateClass = () => {
           className="input input-bordered w-full"
         />
 
+        <label className="text-2xl font-bold">Description</label>
         <textarea
           {...register("description")}
           placeholder="Description"

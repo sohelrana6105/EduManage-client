@@ -26,6 +26,7 @@ import AddClass from "../pages/Dashboard/TeacherDashboard/AddClass";
 import TeacherProfile from "../pages/Dashboard/TeacherDashboard/TeacherProfile";
 import MyClasses from "../pages/Dashboard/TeacherDashboard/MyClasses";
 import UpdateClass from "../pages/Dashboard/TeacherDashboard/UpdateClass";
+import ClassDetails from "../pages/Dashboard/TeacherDashboard/ClassDetails ";
 
 export const router = createBrowserRouter([
   /*======================
@@ -143,6 +144,14 @@ export const router = createBrowserRouter([
         element: (
           <TeacherRoute>
             <UpdateClass></UpdateClass>
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "my-class/:id",
+        element: (
+          <TeacherRoute>
+            <ClassDetails></ClassDetails>
           </TeacherRoute>
         ),
       },
