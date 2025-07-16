@@ -23,8 +23,9 @@ import Forbidden from "../components/shared/Forbidden";
 import MyEnrollClasses from "../pages/Dashboard/StudentDashboard/MyEnrollClasses";
 import StudentProfile from "../pages/Dashboard/StudentDashboard/StudentProfile";
 import AddClass from "../pages/Dashboard/TeacherDashboard/AddClass";
-import MyClass from "../pages/Dashboard/TeacherDashboard/MyClass";
 import TeacherProfile from "../pages/Dashboard/TeacherDashboard/TeacherProfile";
+import MyClasses from "../pages/Dashboard/TeacherDashboard/MyClasses";
+import UpdateClass from "../pages/Dashboard/TeacherDashboard/UpdateClass";
 
 export const router = createBrowserRouter([
   /*======================
@@ -133,7 +134,15 @@ export const router = createBrowserRouter([
         path: "teacher/my-class",
         element: (
           <TeacherRoute>
-            <MyClass />
+            <MyClasses />
+          </TeacherRoute>
+        ),
+      },
+      {
+        path: "update-class/:id",
+        element: (
+          <TeacherRoute>
+            <UpdateClass></UpdateClass>
           </TeacherRoute>
         ),
       },
