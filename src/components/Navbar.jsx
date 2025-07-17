@@ -21,7 +21,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/allclasses"
+          to="/allclass"
           className={({ isActive }) => (isActive ? "text-blue-600" : "")}
         >
           All Classes

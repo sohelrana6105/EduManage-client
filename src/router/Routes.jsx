@@ -27,6 +27,9 @@ import TeacherProfile from "../pages/Dashboard/TeacherDashboard/TeacherProfile";
 import MyClasses from "../pages/Dashboard/TeacherDashboard/MyClasses";
 import UpdateClass from "../pages/Dashboard/TeacherDashboard/UpdateClass";
 import ClassDetails from "../pages/Dashboard/TeacherDashboard/ClassDetails ";
+import AllClasses from "../pages/AllClasses/AllClasses";
+import PrivateRouteUser from "../ProtectedRoutes/PrivateRouteUser";
+import ClassInfo from "../pages/AllClasses/ClassInfo";
 
 export const router = createBrowserRouter([
   /*======================
@@ -46,12 +49,25 @@ export const router = createBrowserRouter([
         path: "forbidden",
         Component: Forbidden,
       },
+      {
+        path: "allclass",
+        Component: AllClasses,
+      },
+      {
+        path: "allclass/class/:id",
+        element: (
+          <PrivateRouteUser>
+            <ClassInfo></ClassInfo>
+          </PrivateRouteUser>
+        ),
+      },
     ],
   },
 
   /*======================
     Authentication Routes
   ========================*/
+
   {
     path: "/",
     Component: AuthLayout,
