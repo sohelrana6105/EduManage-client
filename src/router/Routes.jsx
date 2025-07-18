@@ -30,6 +30,7 @@ import ClassDetails from "../pages/Dashboard/TeacherDashboard/ClassDetails ";
 import AllClasses from "../pages/AllClasses/AllClasses";
 import PrivateRouteUser from "../ProtectedRoutes/PrivateRouteUser";
 import ClassInfo from "../pages/AllClasses/ClassInfo";
+import Payment from "../pages/payment/Payment";
 
 export const router = createBrowserRouter([
   /*======================
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
             <ClassInfo></ClassInfo>
           </PrivateRouteUser>
         ),
+      },
+
+      {
+        path: "payment/:id",
+        element: <Payment></Payment>,
       },
     ],
   },
@@ -183,7 +189,7 @@ export const router = createBrowserRouter([
       /*================Student routes============ */
       // Student routes
       {
-        path: "enrolled-classes",
+        path: "my-enroll-classes",
         element: (
           <StudentRoute>
             <MyEnrollClasses></MyEnrollClasses>
