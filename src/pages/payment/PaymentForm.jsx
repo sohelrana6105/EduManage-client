@@ -28,7 +28,19 @@ const PaymentForm = () => {
 
   const amount = classInfo?.price || 0;
   const amountInCents = parseInt(amount * 100);
-  console.log(amountInCents);
+  // console.log(amountInCents);
+
+  // ✅ Check if user is already enrolled
+  const { data: isAlreadyEnrolled = false, isLoading } = useQuery({
+    queryKey: ["isEnrolled", classId, user?.email],
+    enabled: !!classId && !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/enrolled/check?classId=${classId}&email=${user.email}`
+      );
+      return res.data?.enrolled || false;
+    },
+  });
 
   // hwre the stripe payment logic
   const handleSubmit = async (e) => {
@@ -84,6 +96,8 @@ const PaymentForm = () => {
           email: user?.email,
           name: user?.displayName,
           title: classInfo.title,
+          image: classInfo.image,
+          instructorName: classInfo.instructorName,
           transactionId,
           amount,
           paymentMethod: result.paymentIntent.payment_method_types[0],
@@ -131,10 +145,10 @@ const PaymentForm = () => {
 
       <button
         type="submit"
-        disabled={!stripe}
+        disabled={!stripe || isLoading || isAlreadyEnrolled}
         className="w-full py-3 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Pay ${amount}
+        {isAlreadyEnrolled ? "Already Enrolled" : `Pay $${amount}`}
       </button>
 
       {err && <p className="text-red-600">{err}</p>}

@@ -31,6 +31,8 @@ import AllClasses from "../pages/AllClasses/AllClasses";
 import PrivateRouteUser from "../ProtectedRoutes/PrivateRouteUser";
 import ClassInfo from "../pages/AllClasses/ClassInfo";
 import Payment from "../pages/payment/Payment";
+import MyEnrollClassDetails from "../pages/Dashboard/StudentDashboard/MyEnrollClassDetails";
+import TeachOnEduManage from "../pages/TeachOnEduManage/TeachOnEduManage";
 
 export const router = createBrowserRouter([
   /*======================
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRouteUser>
             <ClassInfo></ClassInfo>
+          </PrivateRouteUser>
+        ),
+      },
+      {
+        path: "teachEdumanage",
+        element: (
+          <PrivateRouteUser>
+            <TeachOnEduManage></TeachOnEduManage>
           </PrivateRouteUser>
         ),
       },
@@ -193,6 +203,14 @@ export const router = createBrowserRouter([
         element: (
           <StudentRoute>
             <MyEnrollClasses></MyEnrollClasses>
+          </StudentRoute>
+        ),
+      },
+      {
+        path: "myenroll-class/:classId",
+        element: (
+          <StudentRoute>
+            <MyEnrollClassDetails></MyEnrollClassDetails>
           </StudentRoute>
         ),
       },

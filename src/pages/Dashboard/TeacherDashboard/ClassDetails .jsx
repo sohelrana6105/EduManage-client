@@ -9,6 +9,7 @@ import { FaPlus } from "react-icons/fa";
 import { AuthContext } from "../../../context/authcontext/AuthContext";
 
 const ClassDetails = () => {
+  // class id
   const { id } = useParams();
   const { user } = use(AuthContext);
   const axiosSecure = UseaxiosSecure();
@@ -36,13 +37,14 @@ const ClassDetails = () => {
     },
   });
 
-  // const { data: submissionCount = 0 } = useQuery({
-  //   queryKey: ["submission-count", id],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get(`/submissions/count/${id}`);
-  //     return res.data.count;
-  //   },
-  // });
+  const { data: submissionCount = 0 } = useQuery({
+    queryKey: ["submission-count", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/submissions/count/${id}`);
+      console.log(res);
+      return res?.data;
+    },
+  });
 
   // assignment data sent in the server
   const { mutateAsync: createAssignment } = useMutation({
@@ -51,7 +53,7 @@ const ClassDetails = () => {
         classId: id,
         assignmentCreator: user.email,
         ...data,
-
+        submissionCount: 0,
         createdAt: new Date().toISOString(), // use ISO format
         updatedAt: new Date().toISOString(),
       };
@@ -106,11 +108,7 @@ const ClassDetails = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard title="Total Enrollments" value={classData.enrolled} />
         <StatCard title="Total Assignments" value={assignments.length} />
-        <StatCard title="Total Submissions" />
-
-        {/* <StatCard title="Total Enrollments" value={enrollmentCount} />
-        <StatCard title="Total Assignments" value={assignments.length} />
-        <StatCard title="Total Submissions" value={submissionCount} /> */}
+        <StatCard title="Total Submissions" value={submissionCount} />
       </div>
 
       {/* Modal */}

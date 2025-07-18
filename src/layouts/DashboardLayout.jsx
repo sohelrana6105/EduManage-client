@@ -68,7 +68,7 @@ const DashboardLayout = () => {
           {role === "student" && (
             <>
               <li>
-                <NavLink to="/dashboard/enrolled-classes">
+                <NavLink to="/dashboard/my-enroll-classes">
                   <FaClipboardList className="mr-2" /> Enrolled Classes
                 </NavLink>
               </li>
