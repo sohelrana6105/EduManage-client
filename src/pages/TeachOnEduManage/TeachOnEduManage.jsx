@@ -26,9 +26,9 @@ const TeachOnEduManage = () => {
       return res.data;
     },
   });
-  console.log(teacherReqData);
-  console.log(isError);
-  console.log(error);
+  // console.log(teacherReqData);
+  // console.log(isError);
+  // console.log(error);
 
   const {
     register,
@@ -164,7 +164,6 @@ const TeachOnEduManage = () => {
                 className="input input-bordered w-full bg-gray-100 text-gray-800"
               />
             </div>
-
             {/* Email */}
             <div className="col-span-1 md:col-span-2">
               <label className="block font-medium text-gray-700 mb-1">
@@ -178,7 +177,6 @@ const TeachOnEduManage = () => {
                 className="input input-bordered w-full bg-gray-100 text-gray-800"
               />
             </div>
-
             {/* Experience */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -199,7 +197,6 @@ const TeachOnEduManage = () => {
                 </p>
               )}
             </div>
-
             {/* Title */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -215,7 +212,6 @@ const TeachOnEduManage = () => {
                 <p className="text-sm text-red-500 mt-1">Title is required.</p>
               )}
             </div>
-
             {/* Category */}
             <div className="col-span-1 md:col-span-2">
               <label className="block font-medium text-gray-700 mb-1">
@@ -240,13 +236,23 @@ const TeachOnEduManage = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="col-span-1 md:col-span-2">
+            <div
+              className={` col-span-1 md:col-span-2  ${
+                userRole.role === "admin" ? "cursor-not-allowed  " : ""
+              }`}
+            >
               <button
                 type="submit"
-                className="btn btn-primary w-full text-lg font-semibold tracking-wide shadow-md hover:shadow-lg transition-all"
+                disabled={userRole.role === "admin"}
+                className={`btn btn-primary w-full text-lg font-semibold tracking-wide shadow-md hover:shadow-lg transition-all ${
+                  userRole.role === "admin" ? " opacity-50" : ""
+                }`}
               >
                 {isRejected ? "Request Again" : "Submit for Review"}
               </button>
+              <p className="text-center text-gray-400 mt-2 font-bold">
+                {userRole.role === "admin" ? "This button not for admin" : ""}
+              </p>
             </div>
           </form>
         )}
