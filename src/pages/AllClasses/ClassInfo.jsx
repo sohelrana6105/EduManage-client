@@ -1,12 +1,15 @@
 import { useParams, useNavigate } from "react-router";
-
 import { useQuery } from "@tanstack/react-query";
 import UseAxios from "../../hooks/UseAxios";
-import { FaDollarSign } from "react-icons/fa";
+import {
+  FaDollarSign,
+  FaUserGraduate,
+  FaChalkboardTeacher,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const ClassInfo = () => {
   const { id } = useParams();
-  console.log(id);
   const axiosInstance = UseAxios();
   const navigate = useNavigate();
 
@@ -18,36 +21,23 @@ const ClassInfo = () => {
     },
   });
 
-  //   console.log(classDetails);
-
-  if (isLoading) {
-    return (
-      <div className="max-w-4xl mx-auto p-4">
-        {/* Image skeleton */}
-        <div className="skeleton h-64 w-full rounded-xl"></div>
-
-        {/* Title */}
-        <div className="skeleton h-8 w-2/3 mt-4"></div>
-
-        {/* Description */}
-        <div className="skeleton h-4 w-full mt-2"></div>
-        <div className="skeleton h-4 w-3/4 mt-2"></div>
-
-        {/* Instructor info */}
-        <div className="skeleton h-4 w-1/2 mt-4"></div>
-
-        {/* Price */}
-        <div className="skeleton h-4 w-1/4 mt-2"></div>
-
-        {/* Button */}
-        <div className="skeleton h-10 w-32 mt-6"></div>
-      </div>
-    );
-  }
-
   const handlePay = () => {
     navigate(`/payment/${id}`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-4xl mx-auto p-6 animate-pulse space-y-4">
+        <div className="skeleton h-64 w-full rounded-xl"></div>
+        <div className="skeleton h-8 w-2/3"></div>
+        <div className="skeleton h-4 w-full"></div>
+        <div className="skeleton h-4 w-3/4"></div>
+        <div className="skeleton h-4 w-1/2"></div>
+        <div className="skeleton h-4 w-1/4"></div>
+        <div className="skeleton h-10 w-32"></div>
+      </div>
+    );
+  }
 
   const {
     title,
@@ -61,29 +51,49 @@ const ClassInfo = () => {
   } = classDetails;
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-8">
       <img
         src={image}
         alt={title}
-        className="rounded-xl w-full max-h-[400px]"
+        className="rounded-lg w-full max-h-[400px] object-cover"
       />
-      <h2 className="text-3xl font-bold mt-4">{title}</h2>
-      <p className="text-gray-600 mt-2">{description}</p>
-      <p className="mt-2">
-        Instructor: <strong>{instructorName}</strong> ({instructorEmail})
-      </p>
-      <p className="flex items-center">
-        Price: <FaDollarSign /> <strong> {price}</strong>
-      </p>
-      <p>Enrolled: {enrolled} student(s)</p>
 
-      <button
-        onClick={handlePay}
-        className="btn btn-primary mt-4"
-        disabled={status !== "approved"}
-      >
-        Pay Now
-      </button>
+      <div className="mt-6 space-y-4">
+        <h2 className="text-4xl font-bold text-gray-800">{title}</h2>
+        <p className="text-gray-600 text-lg">{description}</p>
+
+        <div className="text-gray-700 space-y-1">
+          <p className="flex items-center gap-2">
+            <FaChalkboardTeacher className="text-blue-600" />
+            <strong>{instructorName}</strong>
+          </p>
+          <p className="flex items-center gap-2">
+            <FaEnvelope className="text-green-600" />
+            {instructorEmail}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-6 mt-4 text-lg">
+          <p className="flex items-center gap-2 text-gray-700">
+            <FaDollarSign className="text-green-500" />
+            <strong>{price}</strong>
+          </p>
+          <p className="flex items-center gap-2 text-gray-700">
+            <FaUserGraduate className="text-purple-500" />
+            {enrolled} enrolled
+          </p>
+        </div>
+
+        <button
+          onClick={handlePay}
+          className={`btn btn-primary mt-6 px-6 py-2 text-white font-semibold rounded-lg ${
+            status !== "approved" ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={status !== "approved"}
+        >
+          Pay Now
+        </button>
+      </div>
     </div>
   );
 };

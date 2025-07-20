@@ -121,7 +121,7 @@ const MyClasses = () => {
                       className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
                         cls.status === "approved"
                           ? "bg-green-100 text-green-700"
-                          : cls.status === "denied"
+                          : cls.status === "rejected"
                           ? "bg-red-100 text-red-700"
                           : "bg-yellow-100 text-yellow-700"
                       }`}

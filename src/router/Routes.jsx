@@ -33,6 +33,9 @@ import ClassInfo from "../pages/AllClasses/ClassInfo";
 import Payment from "../pages/payment/Payment";
 import MyEnrollClassDetails from "../pages/Dashboard/StudentDashboard/MyEnrollClassDetails";
 import TeachOnEduManage from "../pages/TeachOnEduManage/TeachOnEduManage";
+import ClassProgress from "../pages/Dashboard/AdminDashboard/ClassProgress";
+import AboutUs from "../components/shared/AboutUs";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   /*======================
@@ -55,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "allclass",
         Component: AllClasses,
+      },
+      {
+        path: "about",
+        Component: AboutUs,
       },
       {
         path: "allclass/class/:id",
@@ -110,6 +117,11 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true, //  this makes it the default child route
+        element: <DashboardHome />,
+      },
+
       /*================ Admin routes============ */
       // {
       //   path: "admin-home",
@@ -141,6 +153,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageClasses />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "class-progress/:id",
+        element: (
+          <AdminRoute>
+            <ClassProgress></ClassProgress>
           </AdminRoute>
         ),
       },

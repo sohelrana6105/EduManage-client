@@ -81,7 +81,7 @@ const AddClass = () => {
       };
       console.log(newClass);
 
-      // 3️⃣ Send to backend
+      // // 3️⃣ Send to backend
       // const backendRes = await axiosSecure.post("/add-class", newClass);
       // console.log(backendRes);
 

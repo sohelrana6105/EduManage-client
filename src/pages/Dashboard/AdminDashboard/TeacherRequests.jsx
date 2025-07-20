@@ -106,7 +106,7 @@ const TeacherRequests = () => {
                 <td className="space-x-2">
                   <button
                     onClick={() => handleApprove(item.email)}
-                    disabled={item.status === "rejected"}
+                    disabled={item.status === "approved"}
                     className={`bg-green-500 text-white px-3 py-1 rounded disabled:opacity-50 disabled:cursor-not-allowed `}
                   >
                     Approve

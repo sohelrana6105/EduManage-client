@@ -9,6 +9,7 @@ const MyEnrollClassDetails = () => {
   const { classId } = useParams();
   const axiosSecure = UseaxiosSecure();
   const [assignments, setAssignments] = useState([]);
+  const [enrolledClass, setEnrolledClass] = useState([]);
   const [rating, setRating] = useState(0);
   const [showTERModal, setShowTERModal] = useState(false);
 
@@ -25,6 +26,15 @@ const MyEnrollClassDetails = () => {
 
   // console.log(assignments);
 
+  useEffect(() => {
+    axiosSecure.get(`/class/${classId}`).then((res) => {
+      // console.log(res);
+      setEnrolledClass(res.data);
+    });
+  }, [classId, axiosSecure, user]);
+
+  console.log("myenrolled", enrolledClass);
+
   // Catch Rating value
   const handleRating = (rate) => {
     if (rate === rating) return;
@@ -32,8 +42,9 @@ const MyEnrollClassDetails = () => {
     console.log("rate inside the funcion", rate);
   };
 
-  console.log("rating ", rating);
-  const handleSubmitAssignment = async (e, assignmentId, title, index) => {
+  // console.log("rating ", rating);
+
+  const handleSubmitAssignment = async (e, assignmentId, title) => {
     e.preventDefault();
     const submission = e.target.submission.value;
     // console.log(submission);
@@ -100,18 +111,22 @@ const MyEnrollClassDetails = () => {
 
     const feedback = {
       classId,
+      classImage: enrolledClass?.image,
+      classTitle: enrolledClass?.title,
       studentName: user?.displayName,
       studentEmail: user?.email,
+      studentImage: user?.photoURL,
       feedback: description,
       rating,
       submittedAt: new Date().toISOString(),
     };
 
-    console.log(feedback);
+    // console.log(feedback);
     try {
       const res = await axiosSecure.post("/feedback", feedback);
 
       setShowTERModal(false);
+      setRating(0);
 
       if (res?.data?.insertedId) {
         Swal.fire({
@@ -139,57 +154,74 @@ const MyEnrollClassDetails = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Assignments</h2>
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2">Title</th>
-            <th className="p-2">Description</th>
-            <th className="p-2">Deadline</th>
-            <th className="p-2">Submission</th>
-            <th className="p-2">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map((a, index) => (
-            <tr key={a._id} className="border-t">
-              <td className="p-2">{a.title}</td>
-              <td className="p-2">{a.description}</td>
-              <td className="p-2">
-                {new Date(a.deadline).toLocaleDateString()}
-              </td>
 
-              {/* Form for this row */}
-              <td className="p-2" colSpan={2}>
-                <form
-                  onSubmit={(e) => {
-                    handleSubmitAssignment(e, a._id, a.title, index);
-                  }}
-                  className="flex gap-2"
-                >
-                  <input
-                    type="text"
-                    name="submission"
-                    className="border p-1 w-full"
-                    placeholder="Repo link or live link"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-3 py-1 rounded"
-                  >
-                    Submit
-                  </button>
-                </form>
-              </td>
+      {assignments.length === 0 ? (
+        <div className="bg-gray-50 text-center text-gray-600 py-10">
+          <p className="text-xl  font-bold">
+            No assignments have been posted by the teacher yet.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">
+            Please check back later for new assignments.
+          </p>
+        </div>
+      ) : (
+        <table className="w-full border">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="p-2">Title</th>
+              <th className="p-2">Description</th>
+              <th className="p-2">Deadline</th>
+              <th className="p-2">Submission</th>
+              <th className="p-2">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {assignments.map((a, index) => (
+              <tr key={a._id} className="border-t">
+                <td className="p-2">{a.title}</td>
+                <td className="p-2">{a.description}</td>
+                <td className="p-2">
+                  {new Date(a.deadline).toLocaleDateString()}
+                </td>
+
+                {/* Form for this row */}
+                <td className="p-2" colSpan={2}>
+                  <form
+                    onSubmit={(e) => {
+                      handleSubmitAssignment(e, a._id, a.title, index);
+                    }}
+                    className="flex gap-2"
+                  >
+                    <input
+                      type="text"
+                      name="submission"
+                      className="border p-1 w-full"
+                      placeholder="Repo link or live link"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       {/* TER Button */}
       <div className="mt-6 text-center">
         <button
-          className="bg-green-600 text-white px-6 py-2 rounded"
+          disabled={assignments.length === 0}
+          className={` text-white px-6 py-2 rounded transition duration-200 ${
+            assignments.length === 0
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700"
+          }`}
           onClick={() => setShowTERModal(true)}
         >
           Teaching Evaluation Report
