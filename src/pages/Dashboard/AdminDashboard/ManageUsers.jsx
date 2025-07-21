@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import UseaxiosSecure from "../../../hooks/UseaxiosSecure";
 import Swal from "sweetalert2";
@@ -7,10 +7,26 @@ const ManageUsers = () => {
   const axiosSecure = UseaxiosSecure();
   const [search, setSearch] = useState("");
 
+  const limit = 10;
+  const [totalCount, setTotalCount] = useState(0);
+  const totalPages = Math.ceil(totalCount / limit);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  console.log("total count", totalCount, "current page", currentPage);
+
+  // 1st step for pagination
+  useEffect(() => {
+    axiosSecure.get("user-count").then((res) => {
+      setTotalCount(res.data.count);
+    });
+  }, [axiosSecure]);
+
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users", search],
+    queryKey: ["users", search, currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users?search=${search}`);
+      const res = await axiosSecure.get(
+        `/users?search=${search}&page=${currentPage}&limit=${limit}`
+      );
       return res.data;
     },
     enabled: true,
@@ -82,6 +98,22 @@ const ManageUsers = () => {
               ))}
             </tbody>
           </table>
+          {/* this is the pagination button */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {[...Array(totalPages).keys()].map((num) => (
+              <button
+                key={num}
+                onClick={() => setCurrentPage(num + 1)}
+                className={`px-3 py-1 rounded ${
+                  currentPage === num + 1
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-300"
+                }`}
+              >
+                {num + 1}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
