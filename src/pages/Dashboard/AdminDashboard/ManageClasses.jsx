@@ -2,10 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import UseaxiosSecure from "../../../hooks/UseaxiosSecure";
+import { useEffect, useState } from "react";
 
 const ManageClasses = () => {
   const axiosSecure = UseaxiosSecure();
   const navigate = useNavigate();
+
+  //  Fot pagination
+  const limit = 10;
+  const [totalCount, setTotalCount] = useState(0);
+  const totalPages = Math.ceil(totalCount / limit);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // console.log(currentPage);
+
+  // 1st step for pagination
+  useEffect(() => {
+    axiosSecure.get("/class-count").then((res) => {
+      setTotalCount(res.data.count);
+    });
+  }, [axiosSecure]);
+
+  // console.log("totalcount", totalCount, "limit", limit);
 
   // 1. Fetch all classes
   const {
@@ -13,9 +31,11 @@ const ManageClasses = () => {
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["all-classes"],
+    queryKey: ["all-classes", currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/allclass`);
+      const res = await axiosSecure.get(
+        `/allclass?page=${currentPage}&limit=${limit}`
+      );
       return res.data;
     },
   });
@@ -116,6 +136,23 @@ const ManageClasses = () => {
             No classes available.
           </p>
         )}
+
+        {/* this is the pagination button */}
+        <div className="flex justify-center mt-4 space-x-2">
+          {[...Array(totalPages).keys()].map((num) => (
+            <button
+              key={num}
+              onClick={() => setCurrentPage(num + 1)}
+              className={`px-3 py-1 rounded ${
+                currentPage === num + 1
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-300"
+              }`}
+            >
+              {num + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaLinkedinIn, FaEnvelope } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import ProfileLogo from "./shared/ProfileLogo";
 
 const Footer = () => {
   return (
@@ -8,7 +9,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* EduManage Branding */}
         <div>
-          <h2 className="text-2xl font-bold mb-2">EduManage</h2>
+          <h2 className="text-2xl font-bold mb-2">
+            <ProfileLogo></ProfileLogo>
+          </h2>
           <p className="text-sm text-gray-400">
             Empowering students and educators with smart learning solutions.
           </p>
