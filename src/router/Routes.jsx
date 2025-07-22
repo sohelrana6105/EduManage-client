@@ -57,7 +57,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "allclass",
-        Component: AllClasses,
+        // Component: AllClasses,
+        element: (
+          <PrivateRouteUser>
+            <AllClasses></AllClasses>
+          </PrivateRouteUser>
+        ),
       },
       {
         path: "about",

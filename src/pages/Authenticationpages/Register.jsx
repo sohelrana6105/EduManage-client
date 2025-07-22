@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 
@@ -21,7 +21,7 @@ const Register = () => {
     reset,
   } = useForm();
 
-  const { createUser, updateUser } = use(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const axiosInstance = UseAxios(); // Optional axios instance for secure post
   const getJwtToken = useJwtToken();
 

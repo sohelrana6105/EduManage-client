@@ -6,7 +6,7 @@ import axios from "axios";
 // setep one go to axios docs and use axios instantce
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://edu-manage-server-swart.vercel.app",
 });
 
 const UseaxiosSecure = () => {
