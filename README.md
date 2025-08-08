@@ -23,10 +23,7 @@ EduManage is a scalable educational management system (MERN / Next.js + Express 
 # Technologies Used
 - **Frontend:** Next.js (app/router) or React, React Router (if not Next.js), Tailwind CSS, Framer Motion, Axios
 - **Backend:** Node.js, Express, MongoDB (Atlas), Mongoose
-- **Auth / Security:** JSON Web Tokens (JWT), bcrypt
-- **Storage / Media:** Cloudinary (or S3) for images
-- **Deployment:** Vercel (frontend), Render / Railway / Heroku (backend)
-- **Dev Tools:** ESLint, Prettier, Nodemon, Postman
+
 
 ---
 
