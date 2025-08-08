@@ -2,7 +2,7 @@
 ![EduManage Banner](./assets/banner-1600x400.png)
 
 # EduManage — Educational Platform (MERN / Next.js)
-**Live Demo:** [https://your-edumanage-frontend.example.com  ](https://edumanage-55a3a.web.app/)
+**Live Demo:** [https://your-edumanage-frontend.example.com  ](https://edumanage-55a3a.web.app/)  <br>
 **Backend API:** [https://your-edumanage-api.example.com](https://vercel.com/sohel-ranas-projects-b38da51f/edu-manage-server)
 
 A full-featured educational platform with separate **Admin**, **Teacher**, and **Student** dashboards. EduManage supports class creation & approval flows, enrollments, assignments & submissions, and teaching evaluation feedback.
