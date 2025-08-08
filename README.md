@@ -39,4 +39,69 @@ EduManage is a scalable educational management system (MERN / Next.js + Express 
 
 ---
 
-# Project Structure
+# Project Structure 
+
+---
+
+# Screenshots
+Add clean screenshots in `/client/public/screenshots` or `/screenshots` and link them below:
+
+![Dashboard Screenshot](./screenshots/dashboard-home.png)
+![Teacher - My Classes](./screenshots/teacher-my-classes.png)
+![Student - Class Details](./screenshots/student-class-details.png)
+
+*(Replace images above with real screenshots — 1280×720 PNG recommended.)*
+
+---
+
+# API (important endpoints)
+> Base path: `/api` (or as configured)
+
+- `POST /api/auth/register` — register user (role: student/teacher)
+- `POST /api/auth/login` — login -> returns JWT
+- `GET /api/classes` — list classes
+- `POST /api/classes` — teacher creates class (protected)
+- `PUT /api/classes/:id` — update class (teacher / admin)
+- `DELETE /api/classes/:id` — delete class (teacher / admin)
+- `POST /api/classes/:id/assignments` — add assignment to class
+- `POST /api/classes/:id/enroll` — enroll student
+- `POST /api/classes/:id/submissions` — student submits assignment
+- `POST /api/feedback` — student feedback / TER
+- `GET /api/admin/summary-stats` — admin summary statistics (single performant route)
+
+*(Adjust depending on your exact route names — these are representative.)*
+
+---
+
+# Dependencies (major)
+**Client (frontend)** — see `client/package.json`
+- react / next / react-dom
+- axios
+- tailwindcss
+- framer-motion
+- react-hook-form (optional)
+- date-fns or dayjs
+
+**Server (backend)** — see `server/package.json`
+- express
+- mongoose
+- bcryptjs
+- jsonwebtoken
+- cors
+- dotenv
+- multer or cloudinary SDK (for image uploads)
+- nodemon (dev)
+
+---
+
+# Environment Variables
+Create `.env` files in `server/` and `client/` as shown.
+
+**Server `.env`**
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/edumanage
+JWT_SECRET=your_jwt_secret_here
+CLOUDINARY_URL=cloudinary://api_key:api_secret@cloud_name
+FRONTEND_URL=https://your-edumanage-frontend.example.com
+
