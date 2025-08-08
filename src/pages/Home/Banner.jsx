@@ -57,7 +57,7 @@ const Banner = () => {
                 {item.sub}
               </p>
               <button
-                onClick={() => navigate("/all-classes")}
+                onClick={() => navigate("/allclass")}
                 className="mt-6 px-6 py-2 sm:px-8 sm:py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 Explore Classes

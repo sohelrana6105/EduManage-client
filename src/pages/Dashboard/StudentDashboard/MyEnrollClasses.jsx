@@ -22,31 +22,52 @@ const MyEnrollClasses = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-6">My Enrolled Classes</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        My Enrolled Classes
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {enrolledClasses.map((classItem) => (
-          <div
-            key={classItem._id}
-            className="rounded-2xl overflow-hidden shadow-lg border"
-          >
-            <img
-              src={classItem.image}
-              alt={classItem.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">{classItem.title}</h3>
-              <p className="text-gray-600 mb-4">
-                Instructor: {classItem.instructorName}
+        {enrolledClasses.length === 0 ? (
+          <div className="col-span-full flex justify-center">
+            <div className=" flex flex-col items-center justify-center  text-center py-16 px-4 bg-gray-50 rounded-xl shadow-sm  w-full">
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                No Enrollments Yet
+              </h3>
+              <p className="text-gray-500 text-base mb-4 max-w-md">
+                You haven't enrolled in any classes yet. Once you enroll, your
+                classes will appear here.
               </p>
-              <Link to={`/dashboard/myenroll-class/${classItem.classId}`}>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl">
-                  Continue
+              <Link to="/allclass">
+                <button className="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                  Browse Classes
                 </button>
               </Link>
             </div>
           </div>
-        ))}
+        ) : (
+          enrolledClasses.map((classItem) => (
+            <div
+              key={classItem._id}
+              className="rounded-2xl overflow-hidden shadow-lg border"
+            >
+              <img
+                src={classItem.image}
+                alt={classItem.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-bold">{classItem.title}</h3>
+                <p className="text-gray-600 mb-4">
+                  Instructor: {classItem.instructorName}
+                </p>
+                <Link to={`/dashboard/myenroll-class/${classItem.classId}`}>
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl">
+                    Continue
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

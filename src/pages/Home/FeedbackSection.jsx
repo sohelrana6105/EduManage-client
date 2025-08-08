@@ -29,7 +29,7 @@ const FeedbackSection = () => {
         pagination={{ clickable: true }}
         modules={[Pagination]}
         spaceBetween={20}
-        slidesPerView={1}
+        slidesPerView={2}
         breakpoints={{
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },

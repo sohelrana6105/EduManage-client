@@ -18,7 +18,7 @@ import ProfileLogo from "../components/shared/ProfileLogo";
 
 const DashboardLayout = () => {
   const { role, roleLoading } = UseUserRole();
-  console.log(role);
+  // console.log(role);
 
   if (roleLoading) {
     return (

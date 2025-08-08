@@ -44,8 +44,8 @@ const Navbar = () => {
 
   const signOutHandler = () => {
     signOutUser()
-      .then((result) => {
-        console.log(result, "signout");
+      .then(() => {
+        // console.log(result, "signout");
         Swal.fire({
           icon: "success",
           title: "User logout!",
@@ -57,13 +57,20 @@ const Navbar = () => {
         navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "User logout!",
+          text: err.message,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+        });
       });
   };
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar bg-base-100 shadow-sm px-4 lg:px-8">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -151,10 +158,10 @@ const Navbar = () => {
           ) : (
             // Not loading and no user: show login/register
             <>
-              <button className="btn">
+              <button className="btn mr-3 hover:bg-blue-600 hover:text-white transition duration-500">
                 <NavLink to={"/login"}> Login </NavLink>
               </button>
-              <button className="btn">
+              <button className="btn hover:bg-blue-600 hover:text-white transition duration-300">
                 <NavLink to={"/register"}> Register </NavLink>
               </button>
             </>

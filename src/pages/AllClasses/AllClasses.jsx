@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import UseaxiosSecure from "../../hooks/UseaxiosSecure";
@@ -7,22 +7,40 @@ import { FiDollarSign, FiUsers } from "react-icons/fi";
 import { FaUserCheck, FaChalkboardTeacher } from "react-icons/fa";
 import UseUserRole from "../../hooks/UseUserRole";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 
 const AllClasses = () => {
   const axiosSecure = UseaxiosSecure();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const userRole = UseUserRole();
   const Navigate = useNavigate();
 
+  const limit = 10;
+  const [totalCount, setTotalCount] = useState(0);
+  const totalPages = Math.ceil(totalCount / limit);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // console.log("total count", totalCount, "current page", currentPage);
+
+  // 1st step for pagination
+  useEffect(() => {
+    axiosSecure.get("/allclass/approved-count").then((res) => {
+      // console.log(res);
+      setTotalCount(res.data);
+    });
+  }, [axiosSecure]);
+
   const { data: classes = [], isLoading } = useQuery({
-    queryKey: ["approved-classes"],
+    queryKey: ["approved-classes", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/allclass/approved?email=${user.email}`
+        `/allclass/approved?page=${currentPage}&limit=${limit}`
       );
       return res.data;
     },
   });
+
+  //   `/allclass/approved?email=${user.email}`
 
   const handleEnroll = async (classId, userRole) => {
     if (userRole?.role !== "student") {
@@ -105,6 +123,21 @@ const AllClasses = () => {
               </div>
             </div>
           </div>
+        ))}
+      </div>
+
+      {/* this is the pagination button */}
+      <div className="flex justify-center mt-4 space-x-2">
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => setCurrentPage(num + 1)}
+            className={`px-3 py-1 rounded ${
+              currentPage === num + 1 ? "bg-blue-600 text-white" : "bg-gray-300"
+            }`}
+          >
+            {num + 1}
+          </button>
         ))}
       </div>
     </div>

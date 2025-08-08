@@ -127,6 +127,7 @@ const ClassDetails = () => {
                 {...register("deadline", { required: true })}
                 type="date"
                 className="input input-bordered w-full"
+                placeholder="Date"
               />
               <textarea
                 {...register("description", { required: true })}

@@ -24,7 +24,7 @@ const UseaxiosSecure = () => {
       return config;
     },
     (error) => {
-      console.log("interceptor", error);
+      // console.log("interceptor", error);
       return Promise.reject(error);
     }
   );

@@ -57,12 +57,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "allclass",
-        // Component: AllClasses,
-        element: (
-          <PrivateRouteUser>
-            <AllClasses></AllClasses>
-          </PrivateRouteUser>
-        ),
+        Component: AllClasses,
+        // element: (
+        //   <PrivateRouteUser>
+        //     <AllClasses></AllClasses>
+        //   </PrivateRouteUser>
+        // ),
       },
       {
         path: "about",

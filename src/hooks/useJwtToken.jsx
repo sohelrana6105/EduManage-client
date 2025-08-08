@@ -8,12 +8,12 @@ const useJwtToken = () => {
       const res = await axiosInstance.post("/jwt", {
         email,
       });
-      console.log("in the mutation hook res jwt", res);
+      // console.log("in the mutation hook res jwt", res);
       return res.data;
     },
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
-      console.log(data);
+      // console.log(data);
     },
     onError: (err) => {
       console.error("JWT fetch failed", err);

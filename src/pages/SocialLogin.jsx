@@ -35,7 +35,7 @@ const SocialLogin = () => {
       .then(async (result) => {
         const user = result.user;
 
-        console.log(user, "result is user");
+        // console.log(user, "result is user");
         // update in the database
 
         const userInfo = {
@@ -46,12 +46,12 @@ const SocialLogin = () => {
           createdAt: new Date().toISOString(),
           lastLogin: new Date().toISOString(),
         };
-        console.log(userInfo);
+        // console.log(userInfo);
 
         // updatde databse api
         // 🔁 Call mutation to save or update user in DB
         const res = await saveSocialUser(userInfo);
-        console.log("save user after reg sociallogin", res);
+        // console.log("save user after reg sociallogin", res);
 
         if (
           res?.result?.modifiedCount ||
@@ -81,7 +81,14 @@ const SocialLogin = () => {
         navigate(location?.state?.from ? location.state.from : "/");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.message}`,
+          text: "something went wrong",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+        });
       });
   };
 
