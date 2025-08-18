@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import Img1 from "../../assets/online_edu.jpg";
 import Img2 from "../../assets/virtual-classroom.jpg";
 import Img3 from "../../assets/students-and-teacher-laptop-studying.jpg";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -45,23 +46,25 @@ const Banner = () => {
             <img
               src={item.src}
               alt={`Slide ${index + 1}`}
-              className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover"
+              className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover opacity-75"
             />
 
             {/* Overlay content */}
-            <div className="absolute inset-0  bg-opacity-40 flex flex-col justify-center items-center text-center px-4 select-none">
+            <div className="absolute inset-0 opacity-100 flex flex-col justify-center items-center text-center px-4 select-none">
               <h2 className="text-white text-2xl sm:text-4xl md:text-5xl font-bold drop-shadow-md leading-tight">
                 {item.heading}
               </h2>
               <p className="text-white mt-2 sm:mt-4 text-sm sm:text-lg max-w-xl drop-shadow-sm">
                 {item.sub}
               </p>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/allclass")}
                 className="mt-6 px-6 py-2 sm:px-8 sm:py-3 bg-white text-blue-600 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 Explore Classes
-              </button>
+              </motion.button>
             </div>
           </div>
         ))}

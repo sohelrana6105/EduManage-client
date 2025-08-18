@@ -19,7 +19,7 @@ const AllClasses = () => {
   const [totalCount, setTotalCount] = useState(0);
   const totalPages = Math.ceil(totalCount / limit);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [sortOrder, setSortOrder] = useState("asc"); // "asc" or "desc"
   // console.log("total count", totalCount, "current page", currentPage);
 
   // 1st step for pagination
@@ -39,6 +39,11 @@ const AllClasses = () => {
       return res.data;
     },
   });
+
+  // Sort classes by price
+  const sortedClasses = [...classes].sort((a, b) =>
+    sortOrder === "asc" ? a.price - b.price : b.price - a.price
+  );
 
   //   `/allclass/approved?email=${user.email}`
 
@@ -68,8 +73,20 @@ const AllClasses = () => {
         Explore Approved Classes
       </h1>
 
+      {/* Sorting Dropdown */}
+      <div className="flex justify-center mb-6">
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {classes.map((cls) => (
+        {sortedClasses.map((cls) => (
           <div
             key={cls._id}
             className="bg-white rounded-xl border border-gray-100 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition duration-300 flex flex-col group"
@@ -136,7 +153,7 @@ const AllClasses = () => {
               currentPage === num + 1 ? "bg-blue-600 text-white" : "bg-gray-300"
             }`}
           >
-            {num + 1}
+            {num + 1} ....
           </button>
         ))}
       </div>

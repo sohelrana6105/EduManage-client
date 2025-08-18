@@ -1,3 +1,6 @@
+import React from "react";
+import { motion } from "framer-motion";
+
 const HowItWorks = () => {
   const steps = [
     {
@@ -29,30 +32,48 @@ const HowItWorks = () => {
   return (
     <section className="bg-white py-20 px-6 md:px-12">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           How EduManage Works
-        </h2>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
+        </motion.h2>
+
+        <motion.p
+          className="text-gray-600 text-lg max-w-2xl mx-auto mb-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           Whether you're here to learn or to teach, EduManage makes everything
           simple and powerful.
-        </p>
+        </motion.p>
 
         <div className="grid md:grid-cols-4 gap-8">
           {steps.map((step, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center"
+              className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-xl transition duration-300 text-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 * idx, duration: 0.6 }}
+              viewport={{ once: true }}
             >
               <img
                 src={step.icon}
-                alt={step.title}
+                alt={`Icon for ${step.title}`}
                 className="w-16 h-16 mx-auto mb-4"
+                loading="lazy"
               />
               <h3 className="text-lg font-bold text-gray-800 mb-2">
                 {step.title}
               </h3>
               <p className="text-sm text-gray-600">{step.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

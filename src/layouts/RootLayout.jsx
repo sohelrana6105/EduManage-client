@@ -8,7 +8,9 @@ const RootLayout = () => {
   return (
     <>
       {/* header  */}
-      <Navbar></Navbar>
+      <header className="sticky top-0 z-50">
+        <Navbar></Navbar>
+      </header>
 
       {/* Routes pages will show here */}
       <Outlet></Outlet>
