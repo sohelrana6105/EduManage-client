@@ -99,6 +99,10 @@ VITE_IMAGE_UPLOAD_KEY=your_image_upload_key
 VITE_PAYMENT_KEY=your_payment_key
 
 ```
+# Run the Project
+```bash
+npm run dev
+```
 
 # Clone backend (in another folder)
 **Git clone backend** 
