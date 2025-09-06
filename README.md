@@ -1,5 +1,7 @@
 <!-- Banner (replace with your banner URL) -->
-![EduManage Banner]([/assets/banner-1600x400.png](https://github.com/sohelrana6105/EduManage-client/blob/main/src/assets/Edu_banner.png))
+
+![EduManage Banner](https://raw.githubusercontent.com/sohelrana6105/EduManage-client/main/src/assets/Edu_banner.png)
+
 
 # EduManage — Educational Platform (MERN / Next.js)
 **Live Demo:** [https://your-edumanage-frontend.example.com  ](https://edumanage-55a3a.web.app/)  <br>
