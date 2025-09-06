@@ -73,3 +73,16 @@ Password : masud123@@
 Email    : nawazshorif@gmail.com  <br>
 Password : nawaz123@@
 
+
+# Installation 
+**Git clone Clone frontend **
+``` https://github.com/sohelrana6105/EduManage-client.git```
+````cd EduManage-client```
+
+# Clone backend (in another folder)
+***Git clone backend***
+``` https://github.com/sohelrana6105/EduManage-server.git```
+```cd EduManage-server```
+
+
+
