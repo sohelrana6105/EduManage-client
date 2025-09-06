@@ -82,7 +82,25 @@ https://github.com/sohelrana6105/EduManage-client.git
 ```bash
 cd EduManage-client 
 ```
-## Clone backend (in another folder)
+# 📦 Install Dependencies
+```bash
+npm install
+
+```
+# Environment variable
+```bash
+VITE_APIKEY=your_api_key
+VITE_AUTHDOMAIN=your_auth_domain
+VITE_PROJECTID=your_project_id
+VITE_STORAGEBUCKET=your_storage_bucket
+VITE_MESSAGINGSENDERID=your_sender_id
+VITE_APPID=your_app_id
+VITE_IMAGE_UPLOAD_KEY=your_image_upload_key
+VITE_PAYMENT_KEY=your_payment_key
+
+```
+
+# Clone backend (in another folder)
 **Git clone backend** 
 ```bash
 https://github.com/sohelrana6105/EduManage-server.git
