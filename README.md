@@ -76,13 +76,15 @@ Password : nawaz123@@
 
 # Installation 
 **Git clone Clone frontend**   <br>  
-``` https://github.com/sohelrana6105/EduManage-client.git```    <br>
-````cd EduManage-client```
+```bash
+https://github.com/sohelrana6105/EduManage-client.git    <br>
+cd EduManage-client
 
 # Clone backend (in another folder)
 **Git clone backend** <br>
-``` https://github.com/sohelrana6105/EduManage-server.git```   <br>
-```cd EduManage-server```
+```bash
+https://github.com/sohelrana6105/EduManage-server.git   <br>
+cd EduManage-server
 
 
 
