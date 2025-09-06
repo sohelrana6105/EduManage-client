@@ -60,6 +60,16 @@ EduManage is a scalable educational management system (MERN / Next.js + Express 
 - dotenv
 - nodemon (dev)
 
+#Sign in / Login 
+**Admin** 
+Email    : dev.sohelranas@gmail.com
+Password :Devsohel209195
 
+**Teacher**
+Email    : masud@gmail.com
+Password : masud123@@
 
+**Student**
+Email    : nawazshorif@gmail.com
+Password : nawaz123@@
 
