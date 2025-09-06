@@ -79,14 +79,13 @@ Password : nawaz123@@
 ```bash
 https://github.com/sohelrana6105/EduManage-client.git
 
-  <br>
 cd EduManage-client 
 
 # Clone backend (in another folder)
-**Git clone backend** <br>
+**Git clone backend** 
 
 https://github.com/sohelrana6105/EduManage-server.git
- <br>
+
 cd EduManage-server 
 
 
